@@ -1,0 +1,100 @@
+import datetime
+
+
+def smena():
+    print('------------------------------------')
+    print("Введите номер Вашей смены: ")
+    print("2/2, утро/вечер, 2 выходных (1)")
+    print("5/2, утро/день/ночь, 2 выходных (2)")
+    print("5/2, утро/вечер, 2 выходных (3)")
+    print("4/2, утро/вечер, 2 выходных (4)")
+    life_ritm = int(input())
+    print('------------------------------------')
+    return life_ritm
+
+def wecant():
+    life_ritm = smena()
+    done = False
+    while not done:
+        if 0 > life_ritm or life_ritm > 4:
+            print("Wrong answer!")
+            life_ritm = smena()
+        else:
+            done = True
+
+    first_day = list(map(int, input("Введите первый день смены (чч.мм.гггг): ").split('.')))
+    day = list(map(int, input("Введите интересующий Вас день (чч.мм.гггг): ").split('.')))
+
+    first_day_a = datetime.date(first_day[2], first_day[1], first_day[0])
+    day_a = datetime.date(day[2], day[1], day[0])
+
+    ds = abs(first_day_a - day_a)
+    ds = str(ds)
+    if ds == '0:00:00':
+        ds = '0'
+
+    ds = ds.split()[0]
+    ds = int(ds)
+
+# print(ds)
+
+    week_count = ds / 7
+    mod_of_weeks = ds % 7
+
+    first_day.append(datetime.date(first_day[2], first_day[1], first_day[0]).isoweekday())
+
+    day.append((first_day[3] + mod_of_weeks) % 7)
+
+
+    # print(day[3])
+
+    if (day[3] == 6 or day[3] == 7) and (life_ritm == 2 or life_ritm == 3):
+        print("Выходной")
+
+    else:
+        if life_ritm == 2:
+            ritm = week_count % 3
+            if ritm == 1:
+                print('День')
+            elif ritm == 2:
+                print('Ночь')
+            else:
+                print('Утро')
+
+        elif life_ritm == 3:
+            ritm = week_count % 2
+            if ritm == 1:
+                print('Вечер')
+            else:
+                print('Утро')
+
+    if life_ritm == 4:
+        is_work = ds % 5
+        if is_work == 5 or is_work == 0:
+            print("Выходной")
+        else:
+            what_smen_2_frth_ritm = ds // 6
+            what_smen_2_frth_ritm = what_smen_2_frth_ritm % 2
+            if what_smen_2_frth_ritm == 1:
+                print("Вечер")
+            else:
+                print("Утро")
+
+    if life_ritm == 1:
+
+        is_work = ds % 4
+        if is_work == 3 or is_work == 0:
+            print("Выходной")
+        else:
+            what_smen_2_fst_ritm = ds // 4
+            what_smen_2_fst_ritm = what_smen_2_fst_ritm % 2
+            if what_smen_2_fst_ritm == 1:
+                print("Вечер")
+            else:
+                print("Утро")
+
+
+wecant()
+# 10.10.2020
+# 17.10.2020
+# 24.10.2020
