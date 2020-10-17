@@ -18,13 +18,11 @@ while not done:
     if 0 > life_ritm or life_ritm > 4:
         print("Wrong answer!")
         life_ritm = smena()
-    else:
-        done = True
 
 
 
 first_day = list(map(int, input("Введите первый день смены (чч.мм.гггг.день недели числом (1-7)): ").split('.')))
-day = list(map(int, input("Введите интересующий Вас день (чч.мм.гггг: ").split('.')))
+day = list(map(int, input("Введите интересующий Вас день (чч.мм.гггг): ").split('.')))
 
 first_day_a = datetime.date(first_day[2], first_day[1], first_day[0])
 day_a = datetime.date(day[2], day[1], day[0])
