@@ -1,0 +1,76 @@
+import datetime
+
+def wecant(life_ritm, first_data, data):
+
+    first_day = list(map(int, first_data.split('.')))
+    day = list(map(int, data.split('.')))
+
+    first_day_a = datetime.date(first_day[2], first_day[1], first_day[0])
+
+    day_a = datetime.date(day[2], day[1], day[0])
+
+    ds = abs(first_day_a - day_a)
+    ds = str(ds)
+    if ds == '0:00:00':
+        ds = '0'
+
+    ds = ds.split()[0]
+    ds = int(ds)
+
+    week_count = ds / 7
+    mod_of_weeks = ds % 7
+
+    first_day.append(datetime.date(first_day[2], first_day[1], first_day[0]).isoweekday())
+
+    day.append((first_day[3] + mod_of_weeks) % 7)
+
+    if (day[3] == 6 or day[3] == 7) and (life_ritm == 2 or life_ritm == 3):
+        return "выходной"
+
+    else:
+        if life_ritm == 2:
+            ritm = week_count % 3
+            if ritm == 1:
+                return 'день'
+            elif ritm == 2:
+                return 'ночь'
+            else:
+                return 'утро'
+
+        elif life_ritm == 3:
+            ritm = week_count % 2
+            if ritm == 1:
+                return 'вечер'
+            else:
+                return 'утро'
+
+    if life_ritm == 4:
+        is_work = ds % 5
+        if is_work == 5 or is_work == 0:
+            return "выходной"
+        else:
+            what_smen_2_frth_ritm = ds // 6
+            what_smen_2_frth_ritm = what_smen_2_frth_ritm % 2
+            if what_smen_2_frth_ritm == 1:
+                return "вечер"
+            else:
+                return "утро"
+
+    if life_ritm == 1:
+        is_work = ds % 4
+        if is_work == 3 or is_work == 0:
+            return "выходной"
+        else:
+            what_smen_2_fst_ritm = ds // 4
+            what_smen_2_fst_ritm = what_smen_2_fst_ritm % 2
+            if what_smen_2_fst_ritm == 1:
+                return "вечер"
+            else:
+                return "утро"
+
+print(wecant(4, "10.10.2020",  "17.10.2020"))
+
+
+# 10.10.2020
+# 17.10.2020
+# 24.10.2020
