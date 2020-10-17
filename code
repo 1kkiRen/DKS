@@ -1,0 +1,47 @@
+def smena():
+    print('------------------------------------')
+    print("Введите номер Вашей смены: ")
+    print("2/2, утро/вечер, 2 выходных (1)")
+    print("5/2, утро/день/вечер, 2 выходных (2)")
+    print("5/2, утро/вечер, 2 выходных (3)")
+    print("4/2, утро/вечер, 2 выходных (4)")
+    life_ritm = int(input())
+    print('------------------------------------')
+    return life_ritm
+
+
+life_ritm = smena()
+done = False
+while not done:
+    if 0 > life_ritm or life_ritm >= 4:
+        print("Wrong answer!")
+        life_ritm = smena()
+    else:
+        done = True
+
+
+
+
+
+first_day = list(map(int, input("Введите первый день смены (число, месяц, год через пробел без запятых): ").split()))
+day = list(map(int, input("Введите интересующий Вас день (число, месяц, год через пробел без запятых): ").split()))
+
+
+
+res = []
+
+if day[0] < first_day[0]:
+    
+res[0] = abs(day[0] - first_day[0])
+res[1] = abs(day[1] - first_day[1])
+res[2] = abs(day[2] - first_day[2])
+
+
+
+
+if day[1] == 1 or day[1] == 3 or day[1] == 5 or day[1] == 7 or day[1] == 8 or day[1] == 10 or day[1] == 12:
+
+
+
+print(first_day)
+print(day)
